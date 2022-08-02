@@ -1,36 +1,42 @@
 package com.educandoweb.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USERS")
+@Table(name="tb_user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name="ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="NAME")
+    @Column(name="name")
     private String name;
 
-    @Column(name="EMAIL")
+    @Column(name="email")
     private String email;
 
-    @Column(name="PHONE")
+    @Column(name="phone")
     private String phone;
 
-    @Column(name="PASSWORD")
+    @Column(name="password")
     private String password;
+
+    @OneToMany(mappedBy = "client")
+    private List<Oder> oders = new ArrayList<>();
 
     public User() {
     }
@@ -81,6 +87,10 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Oder> getOders() {
+        return oders;
     }
 
     @Override
